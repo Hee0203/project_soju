@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang=ko>
+<head>
+<meta charset="utf-8">
+<title>Conceptual SOJU</title>
+<link rel="icon" type="x-icon" href="./images/icon.png">
+<link rel="stylesheet" type="text/css" href="./css/board_write.css">
+<link rel="stylesheet" type="text/css" href="./css/header.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+let boardList_json;
+let temp_write_num;
+$(function(){
+	let check_login = sessionStorage.getItem("mem_id");
+	if (check_login == null) {
+		alert("로그인하셔야 이용 가능합니다.");
+		location.href = "/project_sojul/login.do";
+	}
+    $(".intro_bg").load("/project_soju/header.do");
+    temp_write_num = sessionStorage.getItem("temp_write_num");
+    console.log("temp_write_num:::" + temp_write_num);
+    if (temp_write_num !== null && temp_write_num !== undefined && temp_write_num !== "") {
+    	let boardList = localStorage.getItem("boardList");
+    	boardList_json = JSON.parse(boardList);
+    	console.log(boardList);
+    	for (let i in boardList_json){
+    		if (temp_write_num == boardList_json[i].write_num) {
+    			console.log("write_num가 일치합니다.");
+    			$("#title").val(boardList_json[i].notice_title);
+    			$("#content").val(boardList_json[i].notice_content);
+    			$("input:radio[id='"+boardList_json[i].notice_region+"']").prop("checked", true);
+    			$("input[name='option']:checked").val(boardList_json[i].notice_option);
+    			
+    			let mem_id = sessionStorage.getItem("mem_id");
+    			if(mem_id !== boardList_json[i].mem_id){
+    				$("#write_update").hide();
+    				$("#write_delete").hide();
+    			}
+    		}
+    	}
+    	//수정인 상태이므로 등록 버튼을 숨김
+    	$("#write_insert").hide();
+    }else{
+    	//등록인 상태이므로 수정버튼을 숨기기
+    	$("#write_update").hide();
+    }
+});
+function fn_list(){
+    location.href="/project_soju/board_list.do";
+}
+
+function fn_submit(){
+	let write_num = localStorage.getItem("write_num");
+    if (write_num === null || write_num === undefined || write_num === "") {
+    	write_num = 1;
+    } else {
+    	write_num = parseInt(write_num) + 1;
+    }
+    let notice_title = $("#title").val();
+    let notice_content = $("#content").val();
+    let notice_member = $("input[name='member']:checked").val();
+    let notice_option = $("input[name='option']:checked").val();
+    console.log(notice_title);
+    console.log(notice_content);
+    console.log(notice_member);
+    console.log(notice_option);
+    let region = $("input[name='region']:checked").val();
+    console.log(region);
+    
+    let mem_id = sessionStorage.getItem("mem_id");
+    console.log(mem_id);
+
+    //작성시간
+    let current_date = new Date();
+    console.log(current_date.toLocaleString());
+    
+    let boardWrite = {};
+    boardWrite.write_num = write_num;
+    boardWrite.notice_title = notice_title;
+    boardWrite.notice_content = notice_content;
+    boardWrite.notice_member = notice_member;
+    boardWrite.notice_region = region;
+    if(localStorage.getItem("option")==="secret"){
+	    boardWrite.notice_option = notice_option;    	
+    }
+    boardWrite.mem_id = mem_id;
+    boardWrite.write_date = current_date.toLocaleString();
+    console.log(boardWrite);
+    
+    let boardArray = localStorage.getItem("boardList");
+    if (boardArray === null || boardArray === undefined || boardArray === "") {
+    	boardArray = [];
+    } else {
+    	boardArray = JSON.parse(boardArray);
+    }
+    boardArray.push(boardWrite);
+    
+    let boardList = JSON.stringify(boardArray);
+    console.log(boardList);
+    
+    localStorage.setItem("boardList", boardList);
+    localStorage.setItem("write_num", write_num);
+
+    alert("등록 완료 되었습니다.");
+    location.href="/project_soju/board_list.do"
+}
+
+function fn_write_update(){
+	console.log("fn_write_update");
+	let ret = confirm("수정하시겠습니까?");
+	if(ret == true){
+		console.log("boardList_json:::" + boardList_json);
+		console.log("temp_write_num:::" + temp_write_num);
+		for (let i in boardList_json) {
+			if (temp_write_num == boardList_json[i].write_num) {
+				console.log("temp_write_num와 boardList_json[i].write_num가 동일합니다.");
+				boardList_json[i].notice_title = $("#title").val();
+				boardList_json[i].notice_content = $("#content").val();
+				//지역은 배열로 
+				let update_region = $("input:checkbox[name='region']:checked");
+				boardList_json[i].notice_option = $("input:checkbox[name='option']:checked").val();
+				let arr_region = [];
+				update_region.each(function(){
+					arr_region.push($(this).val());
+				});
+				boardList_json[i].notice_region = arr_region;
+			}
+		}
+		let boardList = JSON.stringify(boardList_json);
+		localStorage.setItem("boardList", boardList);
+		sessionStorage.removeItem("temp_write_num");
+		location.href="/project_soju/board_list.do";
+	}else{
+		alert("취소하셨습니다.");
+	}
+}
+
+function fn_write_delete(){
+	console.log("fn_write_delete");
+	let ret = confirm("삭제 하시겠습니까?");
+	if(ret){
+		console.log("temp_write_num:::" + temp_write_num);
+		for(let i in boardList_json){
+			if (temp_write_num == boardList_json[i].write_num) {
+				let mem_id = sessionStorage.getItem("mem_id");
+				if(mem_id == boardList_json[i].mem_id){
+					boardList_json.splice(i, 1);
+				}else{
+					alert("해당 작성자만 삭제 가능합니다.");
+					return;
+				}
+			}
+		}
+		let boardList = JSON.stringify(boardList_json);
+		localStorage.setItem("boardList", boardList);
+		sessionStorage.removeItem("temp_write_num");
+		alert("삭제되었습니다.");
+		location.href="/project_soju/board_list.do";
+	}else{
+		alert("취소하셨습니다.")
+	}
+}
+
+</script>
+</head>
+<body>
+    <div id="wrap">
+        <div class="intro_bg">
+            
+        </div>
+        <div id="div_span">
+            <span></span>
+        </div>
+        <!-- contents s -->
+        <div class="contents">
+            <div class="contents01">
+                <div class="contents01_h1">
+                    <h3>Q&A</h3>
+                </div>
+                <form action="" id="write_form" method="post">
+                    <div id="div_table">
+                        <table>
+                            <colgroup>
+                                <col width="300">
+                                <col width="500">
+                            </colgroup>
+                            <tr>
+                                <td class="left">제목</td>
+                                <td class="right">
+                                    <input type="text" id="title" maxlength="30" value="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left">내용</td>
+                                <td class="right">
+                                    <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left">지역</td>
+                                <td class="right">
+                                    <label for="Seoul">
+                                        <input type="radio" name="region" id="Seoul" value="Seoul"> 서울
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label for="Incheon">
+                                        <input type="radio" name="region" id="Incheon" value="Incheon"> 인천/경기
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label for="Daejeon">
+                                        <input type="radio" name="region" id="Daejeon" value="Daejeon"> 대전/충청
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label for="Gwangju">
+                                        <input type="radio" name="region" id="Gwangju" value="Gwangju"> 광주/전라/제주
+                                        <br>
+                                    </label>
+                                    <label for="Busan">
+                                        <input type="radio" name="region" id="Busan" value="Busan"> 부산/경남
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label for="Daegu">
+                                        <input type="radio" name="region" id="Daegu" value="Daegu"> 대구/경북
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                    <label for="Gangwon">
+                                        <input type="radio" name="region" id="Gangwon" value="Gangwon"> 강원
+                                        &nbsp;&nbsp;&nbsp;
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left">설정</td>
+                                <td class="right">
+                                    <label for="secret">
+                                        <input type="radio" name="option" id="secret" value="secret"> 비밀글
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- button s -->
+                    <div id="div_button">
+                        <input type="button" onclick="fn_list()" value="목록">
+                        <input type="button" id="write_insert" onclick="fn_submit()" value="등록">
+                        <input type="button" id="write_update" onclick="fn_write_update()" value="수정">
+                        <input type="button" id="write_delete" onclick="fn_write_delete()" value="삭제">
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

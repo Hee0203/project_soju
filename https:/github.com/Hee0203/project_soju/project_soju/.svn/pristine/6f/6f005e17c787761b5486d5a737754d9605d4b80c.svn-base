@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Conceptual SOJU</title>
+    <link rel="icon" type="x-icon" href="./image/icon.png">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
+    <link rel="stylesheet" type="text/css" href="./css/mypage.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+    $(function(){
+        $(".intro_bg").load("/project_soju/header.do");
+        let mem_id = sessionStorage.getItem("mem_id");
+        if(mem_id !== null || mem_id !== undefined || mem_id !== ""){
+	        $("#mem_id").val(mem_id);        	
+        }
+        
+    });
+    
+/*     function find_mem(e){
+    	let member_arr = localStorage.getItem("memberList");
+    	let mem_id = sessionStorage.getItem("mem_id");
+    	for(let i = 0; i < member_arr.length; i++){
+    		if(mem_id == member_arr[i].mem_id){
+    			return e.mem_id == member_arr[i].mem_id;
+    		}
+    	}
+    } */
+
+    function fn_update(){
+       let mem_id = sessionStorage.getItem("mem_id");
+       let mem_name = $("#mem_name").val();
+       let mem_pw = $("#mem_pw").val();
+
+       console.log("mem_id:::"+mem_id);
+       console.log("mem_name:::"+mem_name);
+       console.log("mem_pw:::"+mem_pw);
+        
+       let member_info = {};
+       member_info.mem_id = mem_id;
+       member_info.mem_name = mem_name;
+		member_info.mem_pw = mem_pw;
+		
+		
+        console.log("member_info.mem_id::"+member_info.mem_id);
+        console.log("member_info.mem_name::"+member_info.mem_name);
+        console.log("member_info.mem_pw::"+member_info.mem_pw);
+       console.log(member_info);
+        
+       let member_arr = JSON.parse(localStorage.getItem("memberList"));
+       
+       for(let i = 0; i < member_arr.length; i++){
+       	if(member_info.mem_id == member_arr[i].mem_id){
+				member_arr.splice(i);
+       		member_arr.push(member_info);
+       	} else{
+				alert("수정되지 않았습니다.");
+       		$("#mem_pw").val("");
+       		$("#mem_name").val("");
+       		return;       			
+       		}	
+        }
+        
+       let memberList = JSON.stringify(member_arr);
+       localStorage = window.localStorage;
+       if(!localStorage){
+       	alert("로컬스토리지를 지원하지 않습니다.");
+       	return;
+       } else{
+			localStorage.setItem("memberList", memberList);        
+			alert("수정 완료 되었습니다.");
+			location.href="./main.do";
+       }
+    }
+    function fn_delete(){
+    	let mem_id = sessionStorage.getItem("mem_id");
+    	let mem_name = $("#mem_name").val();
+       let mem_pw = $("#mem_pw").val();
+       console.log("mem_id:::"+mem_id);
+       console.log("mem_name:::"+mem_name);
+       console.log("mem_pw:::"+mem_pw);
+       
+		let member_arr = localStorage.getItem("memberList");
+	    member_arr = JSON.parse(member_arr);
+	    
+	    for(let i = 0; i < member_arr.length; i++){
+	    	console.log("member_arr["+i+"].mem_id::"+member_arr[i].mem_id);
+	    	if(member_arr[i].mem_id == mem_id && member_arr[i].mem_pw == mem_pw){
+				member_arr.splice(i);
+	    	} else{
+		 		alert("삭제에 실패했습니다.");
+		 		$("#mem_pw").val("");
+	       	$("#mem_name").val("");
+	    		return;       			
+			}	
+		}
+	     
+		let memberList = JSON.stringify(member_arr);
+		localStorage = window.localStorage;
+	    if(!localStorage){
+	    	alert("로컬스토리지를 지원하지 않습니다.");
+	    	return;
+	    } else{
+			localStorage.setItem("memberList", memberList);        
+			alert("삭제 완료 되었습니다.");
+			location.href="./login.do";
+		}
+    }
+    
+    function fn_logout(){
+    	sessionStorage.clear();
+    	alert("로그아웃 되었습니다.");
+    	location.href="./login.do";
+    }
+</script>
+
+</head>
+<body>
+    <div id="wrap">
+        <div class="intro_bg">
+
+        </div>
+        <div id="div_span">
+            <span></span>
+        </div>
+        <div class="contents">
+            <div class="contents01">
+                <h1>마이페이지</h1>
+            </div>
+            <div class="contents02">
+
+                <div id="div_table">
+                    <table>
+                        <colgroup>
+                            <col width="150">
+                            <col width="400">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <td class="left">ID</td>
+                                <td class="right">
+                                    <input type="text" name="mem_id" id="mem_id" maxlength="30" value="" readonly></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left">NAME</td>
+                                <td class="right">
+                                    <input type="text" name="mem_name" id="mem_name" maxlength="30" value="" placeholder="이름 입력"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="left">PW</td>
+                                <td class="right">
+                                    <input type="password" name="mem_pw" id="mem_pw" maxlength="30" value="" placeholder="비밀번호 4자리 이상 입력"></input>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    
+                </div>
+                <div class="div_button">
+                    <input type="button" id="update" onclick="fn_update()" value="회원수정">
+                    <input type="button" id="delete" onclick="fn_delete()" value="회원삭제">
+                    <input type="button" id="logout" onclick="fn_logout()" value="로그아웃">
+                </div>
+            </div>
+
+        </div>
+
+        
+    </div>
+
+</body>
+
+
+</html>

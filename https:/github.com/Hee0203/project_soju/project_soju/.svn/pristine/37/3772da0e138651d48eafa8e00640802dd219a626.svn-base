@@ -1,0 +1,33 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 0;
+    color: black;
+}
+
+
+
+.contents01{
+    text-align: center;
+    padding: 10px;
+}
+
+.contents02{
+    width: 100%;
+    height: 822px;
+    text-align: center;
+    background-color: #f1f3f5;
+}
+.contents02 > img{
+    padding-top: 1px;
+    height: 820px;
+}
+
+#div_span > span{
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #f1f3f5;
+}

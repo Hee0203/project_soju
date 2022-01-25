@@ -1,0 +1,168 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 0;
+    color: black;
+}
+
+/* 전체 영역 */
+.contents{
+    width: 100%;
+    height: 1100px;
+    background-color: lightgray;
+}
+
+/* 사용할 영역 */
+.content01{
+    width: 100%;
+    height: 700px;
+    background-color: lightgreen;
+}
+.content01_h1{
+    width: 100%;
+    height: 70px;
+	background-color: white;
+    text-align: center;
+}
+.content01_h3{
+    width: 100%;
+    height: 100px;
+	background-color: white;
+    text-align: center;
+}
+
+/* 공지사항 h1태그 */
+.content01_h1 > h1{
+    padding-top: 10px;
+}
+
+/* 테이블 영역 */
+#div_table{
+    width: 1280px;
+    height: 700px;
+    background-color: aquamarine;
+}
+
+/* List 영역 */
+#div_table > table{
+    width: 80%;
+    height: 600px;
+    background-color: lightcoral;
+}
+th, td{
+    text-align: center;
+    border-bottom: 2px solid lightslategray;
+}
+
+/* paging 영역 */
+.div_paging{
+    width: 100%;
+    height: 100px;
+}
+/* margin:0 auto; 하면 중앙정렬 잘됨 (header.css) */
+.div_paging_a{
+    width: 300px;
+    height: 30px;
+    background-color: tomato;
+    text-align:center;
+    margin-top: 120px;
+}
+.div_board_write > input{
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px; 
+    background-color: rgb(142, 221, 182);
+}
+.div_board_write{
+    position: relative;
+    width: 50px;
+    left: 490px;
+    top: -33px;
+}
+.div_board_write > input:active{
+    transform: translate(2px, 2px);
+}
+.div_paging_a > a{
+    padding-left: 7px;
+}
+.div_paging_a > a:hover{
+    color: lightskyblue;
+    font-weight: bold;
+}
+
+.div_board_write > input:active{
+    transform: translate(3px,3px);
+    background-color: seagreen;
+    color: white;
+}
+#div_span > span{
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #f1f3f5;
+}
+.content01_h3{
+	padding-top: 10px;
+}
+
+.contents, .content01, .content01_h3, #div_table, #div_table > table, .div_paging, .div_paging_a, .div_board_write{
+    background-color: #f1f3f5;
+}
+
+/* toggle 영역 */
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition : .4s;
+    transition: .4s;
+}
+
+.slider::before{
+    position: absolute;
+    content:"";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider{
+    background-color: rgb(30, 150, 20);
+}
+input:focus + .slider{
+    box-shadow: 0 0 1px rgb(30, 150, 20);
+}
+input:checked + .slider::before{
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round{
+    border-radius: 34px;
+}
+.slider.round::before{
+    border-radius: 50%;
+}

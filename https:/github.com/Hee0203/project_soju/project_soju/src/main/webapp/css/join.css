@@ -1,0 +1,142 @@
+*{margin: 0 auto; padding: 0;}
+body{
+    /* vh는 높이값의 100분 1단위입니다.
+        예를 들어 브라우저 높이값이 900px
+        일때 1vh 는 9px라는 뜻입니다.
+    */
+    height: 100vh;
+    background-color: seagreen;
+    text-align: center;
+}
+.login_form{
+    position: fixed;
+    top: 40%;
+    width: 100%;
+}
+.login_form > h1 {
+    color: black;
+    /* text-align: center; */
+}
+.int-area{
+    width: 400px;
+}
+.int-area input{
+    width: 100%;
+    padding: 20px 10px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 18px;
+    color: #fff;
+}
+.int-area input:focus{
+    outline:none;
+}
+.int-area > label{
+    position: relative;
+    top: -30px;
+    left: -150px;
+    font-size: 18px;
+    color: white;
+}
+
+.login_form label[for="mem_id"]{
+    left: -182px;
+}
+.login_form label[for="mem_name"]{
+    left: -168px;
+}
+.login_form label[for="mem_pw"]{
+    left: -180px;
+}
+.login_form label[for="mem_pw_check"]{
+    left: -147px;
+}
+
+.btn-area > button{
+    width: 430px;
+    height: 50px;
+    color: seagreen;
+    font-size: 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: white;
+    margin-left: 20px;
+}
+.login_img{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    margin-top: 150px;
+}
+
+#mem_id:focus + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -182px;
+}
+#mem_name:focus + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -171px;
+}
+#mem_pw:focus + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -179px;
+}
+#mem_pw_check:focus + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -155px;
+}
+
+.int-area label{
+    transition: all .5s ease;
+    /* transition: all 은 top -52px로 이동될때
+        모든 옵션(all)에 대해서 애니매이션 효과를 발생
+        0.5초동안 ease 효과가 천천히 시작되어 
+        중간에 빨라지고 다시 느려짐
+    */
+}
+ 
+#mem_id:valid + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -182px;
+}
+#mem_name:valid + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -171px;
+}
+#mem_pw:valid + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -179px;
+}
+#mem_pw_check:valid + label{
+    top: -52px;
+    font-size: 13px ;
+    color: yellowgreen;
+    left: -155px;
+}
+ 
+.int-area label.warning{
+    color: red;
+    animation-duration: .3s ease;
+    animation-iteration-count: 3;
+    
+}
+/* 버튼클릭액션 */
+#btn_join:active{
+	color: black;
+    
+}

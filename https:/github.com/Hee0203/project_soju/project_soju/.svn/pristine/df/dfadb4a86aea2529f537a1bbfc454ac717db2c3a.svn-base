@@ -1,0 +1,90 @@
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 0;
+    color: black;
+}
+
+
+
+.contents{
+    width: 100%;
+    height: 900px;
+    background-color: cadetblue;
+}
+.contents01{
+    width: 100%;
+    height: 830px;
+    background-color: #f1f3f5;
+}
+.contents01_h1{
+    font-weight: bold;
+    font-size: 27.5px;
+    text-align: center;
+    padding-bottom: 18px;
+    background-color: cornflowerblue;
+    padding-top: 9px;
+
+}
+
+#div_table{
+    width: 1280px;
+    height: 700px;
+    background-color: wheat;
+}
+#div_table td{
+    padding: 20px;
+}
+#div_table .left{
+    text-align: center;
+}
+.right > input{
+    width: 100%;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    background-color: rgba(0,0,0,0.2);
+}
+.right > textarea{
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(0,0,0,0.2);
+}
+
+#div_button{
+    margin-left: 1150px;
+    height: 40px;
+    background-color: #f1f3f5;
+}
+
+#div_button input{
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    margin-right: 10px; 
+    background-color: rgb(142, 221, 182);
+}
+
+#div_button > input:active{
+    transform: translate(3px,3px);
+    background-color: seagreen;
+    color: white;
+}
+
+.contents01_h1, .contents{
+    background-color: white;
+}
+
+#div_table{
+    background-color: #f1f3f5;
+}
+#div_span > span{
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #f1f3f5;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Conceptual SOJU</title>
+<!-- 소주 아이콘 -->
+<link rel="icon" type="imgae/x-icon" href="./images/icon.png">
+<link rel="stylesheet" type="text/css" href="./css/login.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<script>
+    window.onload = function(){
+        let mem_id_tag = document.getElementById("mem_id");
+        let mem_pw_tag = document.getElementById("mem_pw");
+        mem_id_tag.onclick = function(){
+            //alert("111");
+            document.querySelector(".login_form label[for='mem_id']")
+                .classList.remove("warning");
+        }
+        mem_pw_tag.onclick = function(){
+            //alert("112");
+            document.querySelector(".login_form label[for='mem_pw']")
+                .classList.remove("warning");
+        }
+        let check_login = sessionStorage.getItem("mem_id");
+        if(check_login != null){
+        	if(!confirm("로그아웃 하시겠습니까?")){
+        		location.href="./main.do";
+        	} else{
+	        	sessionStorage.clear();
+				alert("로그아웃 되었습니다.");
+				location.href="./login.do";
+        	}
+        }
+        
+        
+    }
+
+	function login(){
+	    //alert("123");
+	    let mem_id = document.getElementById("mem_id").value;
+	    console.log("mem_id:::"+mem_id);
+	    let mem_pw = document.getElementById("mem_pw").value;
+	    console.log("mem_pw:::"+mem_pw);
+	
+	    let label_mem_id =
+	        document.querySelector(".login_form label[for='mem_id']");
+	    let label_mem_pw =
+	        document.querySelector(".login_form label[for='mem_pw']");
+	
+	    if(mem_id == null || mem_id == undefined || mem_id ==""){
+	        label_mem_id.classList.add("warning");
+	        alert("아이디 또는 패스워드가 입력되지 않았습니다.");
+	        return false;
+	    }else if(mem_pw == null || mem_pw == undefined || mem_pw ==""){
+	        label_mem_pw.classList.add("warning");
+	        alert("아이디 또는 패스워드가 입력되지 않았습니다.");
+	        return false;
+	    }else{
+	        let memberList = localStorage.getItem("memberList");
+	        if (memberList == null) {
+				console.log("회원 목록을 불러오지 못했습니다.");
+			 }else{
+				let mem_id = $("#mem_id").val();
+				let mem_pw = $("#mem_pw").val();
+				memberList = JSON.parse(memberList);
+				console.log("memberList.length:::" + memberList.length);
+				for (let i = 0;  i < memberList.length; i++) {
+					if (mem_id == memberList[i].mem_id) {
+						console.log("아이디가 존재합니다.");
+						if (mem_pw == memberList[i].mem_pw) {
+							console.log("아이디와 패스워드가 일치합니다.");
+							sessionStorage.setItem("mem_id", mem_id);
+							location.href = "/project_soju/main.do";
+							return false;
+						}else{
+							alert("아이디 또는 패스워드가 올바르지 않습니다.");
+							return false;
+						}
+					}
+				}
+				alert("아이디가 존재하지 않습니다. 회원가입을 원하시면 join을 눌러주세요.");
+			}
+	    }
+	
+	}
+
+    function join(){
+        location.href="/project_soju/join.do";
+    }
+</script>
+</head>
+<body>
+    <div class="login_img">
+        <img src="./images/img01-removebg-preview.png" alt="이미지가 존재하지 않습니다.">
+    </div>
+    <section class="login_form">
+        <h1>Conceptual SOJU</h1>
+        <form name="loginForm" action="">
+            <div class="int-area">
+                <input type="text" id="mem_id" name="mem_id" value=""
+                    autocomplete="off" required>
+                <label for="mem_id">ID</label>
+            </div>
+            <div class="int-area">
+                <input type="password" id="mem_pw" name="mem_pw" value=""
+                    autocomplete="off" required>
+                <label for="mem_pw">PASSWORD</label>
+            </div>
+            <div class="btn-area">
+                <button type="button" id="btn_id" name="btn_id" onclick="login()">LOGIN</button>
+            </div>
+        </form>
+        <div class="caption">
+            <ul class="caption_ul">
+                <li>
+                    <a href="#" onclick="join()">JOIN US?</a>
+                </li> 
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

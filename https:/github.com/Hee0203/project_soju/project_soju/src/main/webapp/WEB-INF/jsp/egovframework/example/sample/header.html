@@ -1,0 +1,34 @@
+<script>
+$(function(){
+	//alert("header");
+	let check_login = sessionStorage.getItem("mem_id");
+	if (check_login == null) {
+		alert("로그인하셔야 이용 가능합니다.");
+		location.href = "/project_soju/login.do";
+	} 
+});
+</script>
+
+<div class="intro_bg">
+    <div class="header">
+        <div class="intro_text">
+            <h3>Conceptual SOJU</h3>
+        </div>
+        <div class="searchArea">
+            <form action="">
+                <input type="text" id="input_search" name="input_search" value="" placeholder="Search">
+                <!-- placeholder => Android Studio's texthint -->
+                <span>검색</span>
+            </form>
+        </div>
+        <ul class="nav">
+            <li><a href="/project_soju/main.do">HOME</a></li>
+            <li><a href="/project_soju/map.do">MAP</a></li>
+            <li><a href="/project_soju/mypage.do">MYPAGE</a></li>
+            <li><a href="/project_soju/board_list.do">Q&A</a></li>
+            <li><a href="/project_soju/board_drink.do">BOARD</a></li>
+            <li><a href="/project_soju/login.do">LOGIN</a></li>
+        </ul>
+        <!-- header e -->
+    </div>
+</div>

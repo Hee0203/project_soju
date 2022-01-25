@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Conceptual SOJU</title>
+    <link rel="icon" type="image/x-icon" href="./images/icon.png">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>    
+    
+</head>
+<body>
+    <div id="wrap">
+        <div class="intro_bg">
+            <div class="header">
+                <div class="intro_text">
+                    <h3>Conceptual SOJU</h3>
+                </div>
+                <div class="searchArea">
+                    <form action="">
+                        <input type="text" id="input_search" name="input_search" value="" placeholder="Search">
+                        <!-- placeholder => Android Studio's texthint -->
+                        <span>검색</span>
+                    </form>
+                </div>
+                <ul class="nav">
+                    <li><a href="/project_soju/main.do">HOME</a></li>
+		            <li><a href="/project_soju/map.do">MAP</a></li>
+		            <li><a href="/project_soju/mypage.do">MYPAGE</a></li>
+		            <li><a href="/project_soju/board_list.do">Q&A</a></li>
+		            <li><a href="/project_soju/board_drink.do">BOARD</a></li>
+		            <li><a href="/project_soju/login.do">LOGIN</a></li>
+                </ul>
+                <!-- header e -->
+        
+                <!-- 반응형 메뉴 -->
+                <input type="checkbox" id="menuicon">
+                <label for="menuicon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <div class="header_icon">
+                    <ul class="menu">
+	                    <li><a href="/project_soju/main.do">HOME</a></li>
+							<li><a href="/project_soju/map.do">MAP</a></li>
+							<li><a href="/project_soju/mypage.do">MYPAGE</a></li>
+							<li><a href="/project_soju/board_list.do">Q&A</a></li>
+							<li><a href="/project_soju/board_drink.do">BOARD</a></li>
+							<li><a href="/project_soju/login.do">LOGIN</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+
+        <!-- main_text0 s -->
+        <div class="main_text0">
+            <h3 id="about">ABOUT</h3>
+            <div class="explains">
+                <div>
+                    <img src="./images/icon.png" alt="이미지가 존재하지 않습니다.">
+                </div>
+                <div class="contents1">
+                    <p>최근 2030세대는 펀슈머(Fun + Consumer)로 이색소비를 원합니다.
+                        따라서 나오고 있는 요즘 소주들은 컨셉소주로 과일 또는 브랜드와 콜라보되어 나온 소주를 말합니다.                        
+                        종류는 ['에이슬' 시리즈], [처음처럼 X 빠삐코] 등 많습니다.
+                        어떤 것이 시초인지는 알 수 없지만 과일소주 및 이색소주가 인기가 많아지면서
+                        컨셉소주가 다양하게 출시되어지고 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- main_text0 e -->
+
+        <!-- main_text1 s -->
+        <div class="main_text1">
+            <h3 id="content">CONTENT</h3>
+            <p>최근 나온 소주 5가지</p>
+            <ul class="soju">
+                <li>
+                    <div class="soju_img">
+                        <img src="./images/soju1.png" alt="이미지가 없습니다.">
+                    </div>
+                    <div class="contents1_bold">
+                        <p>빠삐코 처음처럼</p>
+                    </div>
+                    <div class="content2">
+                        <p>롯데칠성음료</p>
+                    </div>
+                    <div class="content3">
+                        <p>12%</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="soju_img">
+                        <img src="./images/soju2.png" alt="이미지가 없습니다.">
+                    </div>
+                    <div class="contents1_bold">
+                        <p>민트초코 소주</p>
+                    </div>
+                    <div class="content2">
+                        <p>무학</p>
+                    </div>
+                    <div class="content3">
+                        <p>12.5%</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="soju_img_merona">
+                        <img src="./images/soju3.png" alt="이미지가 없습니다.">
+                    </div>
+                    <div class="contents1_bold">
+                        <p>메로나에이슬</p>
+                    </div>
+                    <div class="content2">
+                        <p>하이트진로</p>
+                    </div>
+                    <div class="content3">
+                        <p>12%</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="soju_img_daeseon">
+                        <img src="./images/soju4.png" alt="이미지가 없습니다.">
+                    </div>
+                    <div class="contents1_bold">
+                        <p>대선 청포도맛</p>
+                    </div>
+                    <div class="content2">
+                        <p>대선주조</p>
+                    </div>
+                    <div class="content3">
+                        <p>12%</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="soju_img">
+                        <img src="./images/soju5.png" alt="이미지가 없습니다.">
+                    </div>
+                    <div class="contents1_bold">
+                        <p>아이셔에이슬</p>
+                    </div>
+                    <div class="content2">
+                        <p>하이트진로</p>
+                    </div>
+                    <div class="content3">
+                        <p>12%</p>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+        <!-- main_text2 -->
+        <div class="main_text2">
+            <h3 id="more">MORE</h3>
+            <p>더 많은 것이 궁금하다면?</p>
+            <ul>
+                <li>
+                    <div class="more_soju">
+                        <h3>더 많은 소주가 궁금하다면?</h3>
+                        <div>
+                            <p>소주 알아보러 가기</p>
+                        </div>
+                        <div class="more2">
+                            <p>click</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="more_mak">
+                        <h3>더 많은 막걸리가 궁금하다면?</h3>
+                        <div>
+                            <p>막걸리 알아보러 가기</p>
+                        </div>
+                        <div class="more2">
+                            <p>click</p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="more_beer">
+                        <h3>더 많은 맥주가 궁금하다면?</h3>
+                        <div>
+                            <p>맥주 알아보러 가기</p>
+                        </div>
+                        <div class="more2">
+                            <p>click</p>
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+        </div>
+
+
+    </div>
+</body>
+</html>
